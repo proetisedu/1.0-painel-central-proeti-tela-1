@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Gerencial PROETI</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --azul-escuro: #082f49;
+      --azul: #0f5f9f;
+      --azul-vivo: #0284c7;
+      --azul-claro: #e0f2fe;
+      --verde: #15803d;
+      --amarelo: #b45309;
+      --fundo: #f3f6fb;
+      --branco: #ffffff;
+      --texto: #1e293b;
+      --cinza: #64748b;
+      --borda: #e2e8f0;
+      --sombra: 0 14px 34px rgba(8, 47, 73, 0.16);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background: var(--fundo);
+      color: var(--texto);
+    }
+
+    header {
+      min-height: 330px;
+      background:
+        linear-gradient(135deg, rgba(8, 47, 73, 0.94), rgba(15, 95, 159, 0.90)),
+        url("https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 42px 24px;
+    }
+
+    .topo {
+      max-width: 1180px;
+      margin: auto;
+      width: 100%;
+    }
+
+    .selo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 8px 15px;
+      border-radius: 999px;
+      font-size: 13px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    header h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      margin-bottom: 14px;
+      letter-spacing: -1px;
+    }
+
+    header p {
+      max-width: 880px;
+      line-height: 1.65;
+      font-size: 17px;
+      opacity: 0.96;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: -54px auto 32px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .apresentacao {
+      background: rgba(255,255,255,0.96);
+      border-radius: 24px;
+      padding: 28px;
+      border: 1px solid var(--borda);
+      box-shadow: var(--sombra);
+      margin-bottom: 28px;
+    }
+
+    .apresentacao h2 {
+      color: var(--azul-escuro);
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+
+    .apresentacao p {
+      color: var(--cinza);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .secao-titulo {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin: 28px 0 18px;
+    }
+
+    .secao-titulo h2 {
+      font-size: 24px;
+      color: var(--azul-escuro);
+    }
+
+    .secao-titulo span {
+      color: var(--cinza);
+      font-size: 14px;
+    }
+
+    .barra {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .barra input {
+      flex: 1;
+      min-width: 250px;
+      padding: 15px 17px;
+      border-radius: 16px;
+      border: 1px solid var(--borda);
+      font-size: 15px;
+      outline: none;
+      background: white;
+    }
+
+    .barra input:focus {
+      border-color: var(--azul-vivo);
+      box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.12);
+    }
+
+    .barra button {
+      border: none;
+      background: var(--azul);
+      color: white;
+      padding: 15px 22px;
+      border-radius: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .barra button:hover {
+      background: var(--azul-escuro);
+      transform: translateY(-1px);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--branco);
+      border-radius: 24px;
+      padding: 25px;
+      border: 1px solid var(--borda);
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+      transition: 0.25s ease;
+      min-height: 310px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--azul), var(--azul-vivo));
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--sombra);
+    }
+
+    .icone {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      background: var(--azul-claro);
+      color: var(--azul);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 23px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      color: var(--azul-escuro);
+      font-size: 20px;
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+
+    .card p {
+      color: var(--cinza);
+      font-size: 14px;
+      line-height: 1.58;
+      margin-bottom: 18px;
+      flex: 1;
+    }
+
+    .status {
+      display: inline-block;
+      width: fit-content;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 11px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .disponivel {
+      color: var(--verde);
+      background: #dcfce7;
+    }
+
+    .implantacao {
+      color: var(--amarelo);
+      background: #ffedd5;
+    }
+
+    .card a {
+      text-decoration: none;
+      background: linear-gradient(135deg, var(--azul), var(--azul-vivo));
+      color: white;
+      padding: 13px 16px;
+      border-radius: 14px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .card a:hover {
+      filter: brightness(0.92);
+    }
+
+    .card.inativo a {
+      background: #cbd5e1;
+      color: #475569;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    .acesso-rapido {
+      background: white;
+      border: 1px solid var(--borda);
+      border-radius: 24px;
+      padding: 24px;
+      margin-top: 30px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+    }
+
+    .acesso-rapido h2 {
+      color: var(--azul-escuro);
+      margin-bottom: 16px;
+      font-size: 22px;
+    }
+
+    .links-rapidos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .link-rapido {
+      text-decoration: none;
+      color: var(--texto);
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: 0.2s;
+      background: #f8fafc;
+    }
+
+    .link-rapido:hover {
+      background: var(--azul-claro);
+      border-color: var(--azul-vivo);
+      transform: translateY(-2px);
+    }
+
+    .link-rapido i {
+      color: var(--azul);
+      font-size: 18px;
+    }
+
+    footer {
+      background: var(--azul-escuro);
+      color: white;
+      margin-top: 42px;
+      padding: 30px 18px;
+      text-align: center;
+    }
+
+    footer p {
+      margin: 6px 0;
+      font-size: 14px;
+      opacity: 0.92;
+    }
+
+    footer .dev {
+      margin-top: 14px;
+      font-weight: 700;
+      color: #bfdbfe;
+    }
+
+    @media (max-width: 650px) {
+      main {
+        margin-top: -36px;
+      }
+
+      .secao-titulo {
+        display: block;
+      }
+
+      .secao-titulo span {
+        display: block;
+        margin-top: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="topo">
+      <span class="selo">
+        <i class="fa-solid fa-chart-line"></i>
+        ARCTI / SEDU · PROETI
+      </span>
+
+      <h1>Portal Gerencial PROETI</h1>
+
+      <p>
+        Programa Capixaba de Fomento à Implementação de Escolas Municipais
+        de Ensino Fundamental em Tempo Integral. Ambiente integrado para
+        acompanhamento, monitoramento, avaliação e gestão das ações do PROETI.
+      </p>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="apresentacao">
+      <h2>Bem-vindo ao Portal Gerencial</h2>
+      <p>
+        Este portal reúne os principais painéis temáticos do PROETI,
+        organizados por eixo de acompanhamento, para apoiar a análise técnica,
+        o monitoramento da execução, a avaliação dos resultados e a tomada de decisão.
+      </p>
+    </section>
+
+    <div class="secao-titulo">
+      <div>
+        <h2>Painéis Temáticos</h2>
+        <span>Selecione o painel desejado para acessar as informações consolidadas.</span>
+      </div>
+    </div>
+
+    <div class="barra">
+      <input type="text" id="busca" placeholder="Buscar painel por tema, município, escola, resultado ou execução...">
+      <button onclick="limparBusca()">Limpar</button>
+    </div>
+
+    <section class="grid" id="menuGrid"></section>
+
+    <section class="acesso-rapido">
+      <h2>Acesso Rápido</h2>
+
+      <div class="links-rapidos">
+        <a class="link-rapido" href="#" target="_blank">
+          <i class="fa-solid fa-scale-balanced"></i>
+          Legislação do PROETI
+        </a>
+
+        <a class="link-rapido" href="#" target="_blank">
+          <i class="fa-solid fa-folder-open"></i>
+          Materiais Orientativos
+        </a>
+
+        <a class="link-rapido" href="#" target="_blank">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          Prestação de Contas
+        </a>
+
+        <a class="link-rapido" href="#" target="_blank">
+          <i class="fa-solid fa-pen-to-square"></i>
+          Reformulação de Plano
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Secretaria da Educação do Estado do Espírito Santo</p>
+    <p>Programa Capixaba de Fomento à Implementação de Escolas Municipais de Ensino Fundamental em Tempo Integral – PROETI</p>
+    <p>Portal Gerencial PROETI · Versão 1.0</p>
+    <p class="dev">Sistema desenvolvido por Gledson Figueiredo</p>
+  </footer>
+
+  <script>
+    const modulos = [
+      {
+        titulo: "Adesões e Pactuação",
+        descricao: "Municípios participantes, editais, escolas contempladas, matrículas pactuadas e informações de adesão ao programa.",
+        icone: "fa-solid fa-map-location-dot",
+        status: "Disponível em breve",
+        link: "#",
+        ativo: false
+      },
+      {
+        titulo: "Monitoramento da Execução Financeira",
+        descricao: "Acompanhamento dos valores planejados, executados, saldos, percentuais de execução e situação por município e edital.",
+        icone: "fa-solid fa-chart-column",
+        status: "Disponível em breve",
+        link: "#",
+        ativo: false
+      },
+      {
+        titulo: "Repasses Financeiros e Planos de Aplicação",
+        descricao: "Consulta aos repasses realizados, parcelas, planos de aplicação financeira, reformulações e valores disponíveis.",
+        icone: "fa-solid fa-coins",
+        status: "Disponível em breve",
+        link: "#",
+        ativo: false
+      },
+      {
+        titulo: "Evolução Histórica das Matrículas",
+        descricao: "Série histórica das matrículas em tempo integral, evolução por município, crescimento anual e comparativos.",
+        icone: "fa-solid fa-arrow-trend-up",
+        status: "Disponível em breve",
+        link: "#",
+        ativo: false
+      },
+      {
+        titulo: "Dados das Escolas",
+        descricao: "Caracterização das escolas contempladas, localização, etapas atendidas, organização escolar e oferta educacional.",
+        icone: "fa-solid fa-school",
+        status: "Disponível em breve",
+        link: "#",
+        ativo: false
+      },
+      {
+        titulo: "Resultados Educacionais",
+        descricao: "Indicadores educacionais por escola e município, incluindo PAEBES, Fluência, AFAS, IDEB e outros resultados.",
+        icone: "fa-solid fa-bullseye",
+        status: "Disponível em breve",
+        link: "#",
+        ativo: false
+      },
+      {
+        titulo: "Visitas Técnicas",
+        descricao: "Registro e acompanhamento das visitas técnicas de monitoramento, relatórios, municípios visitados e encaminhamentos.",
+        icone: "fa-solid fa-clipboard-check",
+        status: "Disponível em breve",
+        link: "#",
+        ativo: false
+      }
+    ];
+
+    const menuGrid = document.getElementById("menuGrid");
+    const busca = document.getElementById("busca");
+
+    function renderizarModulos(lista) {
+      menuGrid.innerHTML = "";
+
+      if (lista.length === 0) {
+        menuGrid.innerHTML = `
+          <div class="card">
+            <div class="icone"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <h3>Nenhum painel encontrado</h3>
+            <p>Não há painel correspondente ao termo pesquisado. Tente buscar por outro tema.</p>
+            <span class="status implantacao">Pesquisa sem resultado</span>
+            <a href="#" onclick="limparBusca()">Limpar busca</a>
+          </div>
+        `;
+        return;
+      }
+
+      lista.forEach(modulo => {
+        const card = document.createElement("div");
+        card.className = modulo.ativo ? "card" : "card inativo";
+
+        const classeStatus = modulo.ativo ? "status disponivel" : "status implantacao";
+        const textoBotao = modulo.ativo ? "Acessar painel" : "Disponível em breve";
+
+        card.innerHTML = `
+          <div class="icone"><i class="${modulo.icone}"></i></div>
+          <h3>${modulo.titulo}</h3>
+          <p>${modulo.descricao}</p>
+          <span class="${classeStatus}">${modulo.ativo ? "Disponível" : modulo.status}</span>
+          <a href="${modulo.link}" target="_blank">${textoBotao}</a>
+        `;
+
+        menuGrid.appendChild(card);
+      });
+    }
+
+    busca.addEventListener("input", () => {
+      const termo = busca.value.toLowerCase();
+
+      const filtrados = modulos.filter(modulo =>
+        modulo.titulo.toLowerCase().includes(termo) ||
+        modulo.descricao.toLowerCase().includes(termo)
+      );
+
+      renderizarModulos(filtrados);
+    });
+
+    function limparBusca() {
+      busca.value = "";
+      renderizarModulos(modulos);
+    }
+
+    renderizarModulos(modulos);
+  </script>
+
+</body>
+</html>
